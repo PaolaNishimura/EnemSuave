@@ -66,7 +66,6 @@ class ArchiveRepository extends BaseRepository implements ArchiveRepositoryInter
     {
         $data = [];
         $filename = $this->fileService->uploadFile($file);
-        dd($filename);
 
         $data['title'] = $title;
         $data['url'] = $filename;
