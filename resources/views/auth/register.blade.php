@@ -12,7 +12,7 @@
 
                 <label for="inputPassword">Nome</label>
                 <div class="form-label-group">
-                    <input name="name" type="text" id="inputPassword" class="form-control" placeholder="Nome" required>
+                    <input name="name" type="text" id="inputPassword" class="form-control" placeholder="Nome" required autofocus>
                     @if ($errors->has('name'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('name') }}</strong>
@@ -22,7 +22,7 @@
 
                 <label for="inputEmail">Email</label>
                 <div class="form-label-group">
-                    <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+                    <input name="email" type="email" id="inputEmail" class="form-control" placeholder="Email" required >
                     @if ($errors->has('email'))
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $errors->first('email') }}</strong>
