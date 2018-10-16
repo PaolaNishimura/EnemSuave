@@ -37,9 +37,9 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         $this->query = $this->newQuery();
     }
 
-    public function getCategories()
+    public function getCategories($take = 15, $paginate = true)
     {
-        return $this->getAll();
+        return $this->getAll($take, $paginate);
     }
 
     public function createCategory(Request $request)

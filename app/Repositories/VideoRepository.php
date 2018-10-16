@@ -3,12 +3,14 @@
 namespace App\Repositories;
 
 use App\Repositories\BaseRepository;
+use App\Repositories\CategoryRepository;
 use App\Repositories\Interfaces\VideoRepositoryInterface;
 
 use App\Traits\CrudMethods;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class VideoRepository extends BaseRepository implements VideoRepositoryInterface
 {
@@ -20,6 +22,7 @@ class VideoRepository extends BaseRepository implements VideoRepositoryInterface
      * @var string $query
      */
     private $query;
+    private $category;
 
     /**
      * Model class for repositories.
@@ -35,6 +38,7 @@ class VideoRepository extends BaseRepository implements VideoRepositoryInterface
     public function __construct()
     {
         $this->query = $this->newQuery();
+        $this->category = new CategoryRepository();
     }
     
     public function getVideos()
@@ -45,7 +49,7 @@ class VideoRepository extends BaseRepository implements VideoRepositoryInterface
     public function createVideo(Request $request)
     {
         $data = $request->all();
-        $data['user_id'] = 1;
+        $data['user_id'] = Auth::user()->id;
 
         return $this->create($data);
     }
@@ -63,5 +67,17 @@ class VideoRepository extends BaseRepository implements VideoRepositoryInterface
     public function deleteVideo(Model $model)
     {
         return $this->delete($model);
+    }
+
+    public function getCategoriesFromVideo($idVideo)
+    {
+        $video = $this->getVideoByID($idVideo);
+        return $video->categories;
+    }
+
+    public function addCategoryToVideo($idCategories, $idVideo)
+    {
+        $video = $this->getVideoByID($idVideo);
+        return $video->categories()->attach($idCategories);
     }
 }

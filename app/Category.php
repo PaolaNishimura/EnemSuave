@@ -15,4 +15,9 @@ class Category extends Model
     {
         return $this->morphedByMany('App\Post', 'categorizable');
     }
+
+    public function videos()
+    {
+        return $this->morphedByMany('App\Video', 'categorizable');
+    }
 }

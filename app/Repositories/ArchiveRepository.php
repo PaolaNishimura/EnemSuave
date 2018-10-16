@@ -43,9 +43,9 @@ class ArchiveRepository extends BaseRepository implements ArchiveRepositoryInter
         $this->fileService = new FileService();
     }
 
-    public function getArchives()
+    public function getArchives($take = 15, $paginate = false)
     {
-        return $this->getAll();
+        return $this->getAll($take, $paginate);
     }
 
     public function getArchiveByUrl($url)

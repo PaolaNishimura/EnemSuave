@@ -3,12 +3,14 @@
 namespace App\Repositories;
 
 use App\Repositories\BaseRepository;
+use App\Repositories\CategoryRepository;
 use App\Repositories\Interfaces\PostRepositoryInterface;
 
 use App\Traits\CrudMethods;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class PostRepository extends BaseRepository implements PostRepositoryInterface
 {
@@ -20,6 +22,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
      * @var string $query
      */
     private $query;
+    private $category;
 
     /**
      * Model class for repositories.
@@ -35,6 +38,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     public function __construct()
     {
         $this->query = $this->newQuery();
+        $this->category = new CategoryRepository();
     }
     
     public function getPosts()
@@ -45,7 +49,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     public function createPost(Request $request)
     {
         $data = $request->all();
-        $data['user_id'] = 1;
+        $data['user_id'] = Auth::user()->id;
 
         return $this->create($data);
     }
@@ -63,5 +67,29 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     public function deletePost(Model $model)
     {
         return $this->delete($model);
+    }
+
+    public function getCategoriesFromPost($idPost)
+    {
+        $post = $this->getPostByID($idPost);
+        return $post->categories;
+    }
+
+    public function addCategoryToPost($idCategories, $idPost)
+    {
+        $post = $this->getPostByID($idPost);
+        return $post->categories()->attach($idCategories);
+    }
+
+    public function getArchiveFromPost($idPost)
+    {
+        $post = $this->getPostByID($idPost);
+        return $post->archives;
+    }
+
+    public function addArchiveToPost($idArchives, $idPost)
+    {
+        $post = $this->getPostByID($idPost);
+        return $post->archives()->attach($idArchives);
     }
 }

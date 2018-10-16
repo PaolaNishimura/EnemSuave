@@ -21,6 +21,6 @@ class Video extends Model
 
     public function categories()
     {
-        return $this->morphedByMany('App\Video', 'categorizable');
+        return $this->morphToMany('App\Category', 'categorizable');
     }
 }
