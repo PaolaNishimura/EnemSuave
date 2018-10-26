@@ -9,10 +9,14 @@
     @stop
 
     {!! Form::open(['route' => 'archives.store', 'method' => 'post', 'files' => 'true']) !!}
-        {!! Form::label('title', 'Titulo') !!}
-        {!! Form::text('title') !!}
-        {!! Form::file('archive') !!}
-        {!! Form::submit('Novo arquivo') !!}
+        <div class="form-group">
+            {!! Form::label('title', 'Titulo') !!}
+            {!! Form::text('title', '', ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::file('archive', ['class' => 'form-control-file']) !!}
+        </div>
+        {!! Form::submit('Novo arquivo', ['class' => 'btn btn-primary']) !!}
     {!! Form::close() !!}
 
 @endsection

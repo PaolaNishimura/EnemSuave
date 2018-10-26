@@ -90,4 +90,11 @@ class CategoryController extends Controller
         //
         return $this->category->deleteCategory($category) ? redirect()->route('categories.index') : "Erro";
     }
+
+    public function getCategories()
+    {
+        $categories = $this->category->getCategories();
+        
+        return response()->json($categories);
+    }
 }

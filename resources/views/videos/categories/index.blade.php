@@ -9,16 +9,57 @@
     @stop
 
     {!! Form::open(['route' => ['videos.categories.store', $video->id], 'method' => 'post']) !!}
-        <select name="categories_id">
-        @foreach($categories as $category)
-            <option value="{{$category->id}}">{{$category->name}}</option>
-        @endforeach
-        </select>
+        <div class="form-group">
+            <select name="categories_id" class="form-control">
+                <option value="N" selected="selected">Selecione um categoria</option>
+            @foreach($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+            @endforeach
+            </select>
+        </div>
         {!! Form::submit('Adicionar Categoria') !!}
     {!! Form::close() !!}
 
-    @foreach($categoriesAttachedToVideo as $category)
-        <p>{{$category->name}}</p>
-    @endforeach
+    <table id="myTable" class="table table-striped" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th class="th-sm">Categoria
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+                <th class="th-sm">Remover
+                    <i class="fa fa-sort float-right" aria-hidden="true"></i>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(!$categoriesAttachedToVideo->isEmpty())
+                @foreach($categoriesAttachedToVideo as $category)
+                    <tr>
+                        <td>{{$category->name}}</td>
+                        <td><form method="post" action="{{ route('videos.categories.destroy', [$video->id, $category->id]) }}">
+                                @csrf
+                                <input hidden name="_method" value="delete">
+                                <button class="btn btn-danger">Remover</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            @else
+                <tr>
+                    <td colspan="2">Não existe nenhum registro</td>
+                </tr>
+            @endif
+        </tbody>
+    </table>
 
 @endsection
+
+@section('js')
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable( {
+            } );
+            $('#myTable_wrapper .dataTables_length').addClass('d-flex flex-row');
+        });
+    </script>
+@stop

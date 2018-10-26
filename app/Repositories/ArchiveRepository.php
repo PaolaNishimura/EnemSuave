@@ -59,7 +59,7 @@ class ArchiveRepository extends BaseRepository implements ArchiveRepositoryInter
         $title = $model->title;
         $filename = $model->url;
 
-        return $this->fileService->donwloadFile($filename, $title);
+        return $this->fileService->donwloadFile($filename, $filename);
     }
 
     public function uploadArchive(UploadedFile $file, $title)

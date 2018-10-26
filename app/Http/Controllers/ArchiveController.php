@@ -78,7 +78,7 @@ class ArchiveController extends Controller
         //
         $archive = $this->archive->getArchiveByUrl($archive->url);
 
-        return view('archives.show', compact('archive'));
+        return view('archives.edit', compact('archive'));
     }
 
     /**
@@ -91,7 +91,7 @@ class ArchiveController extends Controller
     public function update(Request $request, Archive $archive)
     {
         //
-        $archive = $this->archive->updateArchive($request->file, $archive, $request->title);
+        $archive = $this->archive->updateArchive($request->archive, $archive, $request->title);
 
         return redirect()->route('archives.index');
     }
@@ -105,8 +105,13 @@ class ArchiveController extends Controller
     public function destroy(Archive $archive)
     {
         //
-        $archive = $this->archive->deleteArchive($archive->url, $archive);
+        $archive = $this->archive->deleteArchive($archive);
 
         return redirect()->route('archives.index');
+    }
+
+    public function download($url)
+    {
+        return $this->archive->downloadFileByUrl($url);
     }
 }

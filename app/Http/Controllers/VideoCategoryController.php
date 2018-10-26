@@ -40,8 +40,18 @@ class VideoCategoryController extends Controller
     public function store($id, Request $request)
     {
         //
+        if($request->categories_id == "N"){
+            return redirect()->route('videos.categories.index', $id);
+        }
         $video = $this->video->addCategoryToVideo($request->categories_id, $id);
 
         return redirect()->route('videos.categories.index', $id);
+    }
+
+    public function destroy($idVideo, $idCategory)
+    {
+        $video = $this->video->removeCategoryFromVideo($idCategory, $idVideo);
+
+        return redirect()->route('videos.categories.index', $idVideo);
     }
 }

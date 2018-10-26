@@ -80,4 +80,10 @@ class VideoRepository extends BaseRepository implements VideoRepositoryInterface
         $video = $this->getVideoByID($idVideo);
         return $video->categories()->attach($idCategories);
     }
+
+    public function removeCategoryFromVideo($idCategories, $idVideo)
+    {
+        $video = $this->getVideoByID($idVideo);
+        return $video->categories()->detach($idCategories);
+    }
 }

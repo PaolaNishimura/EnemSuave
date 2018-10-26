@@ -9,13 +9,19 @@
     @stop
 
     {!! Form::open(['route' => 'videos.store', 'method' => 'post']) !!}
-        {!! Form::label('title', 'Titulo') !!}
-        {!! Form::text('title') !!}
-        {!! Form::label('rel', 'Rel') !!}
-        {!! Form::text('rel') !!}
-        {!! Form::label('url', 'Url do Embed') !!}
-        {!! Form::text('url') !!}
-        {!! Form::submit('Novo Video') !!}
+        <div class="form-group">
+            {!! Form::label('title', 'Titulo') !!}
+            {!! Form::text('title', '', ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('rel', 'Rel') !!}
+            {!! Form::text('rel', '', ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('url', 'Url do Embed') !!}
+            {!! Form::text('url', '', ['class' => 'form-control']) !!}
+        </div>
+        {!! Form::submit('Novo Video', ['class' => 'btn btn-primary']) !!}
     {!! Form::close() !!}
 
 @endsection

@@ -16,4 +16,10 @@ interface VideoRepositoryInterface
     public function updateVideo(Model $model, Request $request);
 
     public function deleteVideo(Model $model);
+
+    public function getCategoriesFromVideo($idVideo);
+
+    public function addCategoryToVideo($idCategories, $idVideo);
+
+    public function removeCategoryFromVideo($idCategories, $idVideo);
 }

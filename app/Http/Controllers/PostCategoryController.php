@@ -40,8 +40,19 @@ class PostCategoryController extends Controller
     public function store($id, Request $request)
     {
         //
+        if($request->categories_id == "N"){
+            return redirect()->route('videos.categories.index', $id);
+        }
+        
         $post = $this->post->addCategoryToPost($request->categories_id, $id);
 
         return redirect()->route('posts.categories.index', $id);
+    }
+
+    public function destroy($idPost, $idCategory)
+    {
+        $post = $this->post->removeCategoryToPost($idCategory, $idPost);
+
+        return redirect()->route('posts.categories.index', $idPost);
     }
 }

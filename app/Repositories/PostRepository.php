@@ -81,6 +81,12 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         return $post->categories()->attach($idCategories);
     }
 
+    public function removeCategoryToPost($idCategories, $idPost)
+    {
+        $post = $this->getPostByID($idPost);
+        return $post->categories()->detach($idCategories);
+    }
+
     public function getArchiveFromPost($idPost)
     {
         $post = $this->getPostByID($idPost);
@@ -91,5 +97,11 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     {
         $post = $this->getPostByID($idPost);
         return $post->archives()->attach($idArchives);
+    }
+
+    public function removeArchiveToPost($idArchives, $idPost)
+    {
+        $post = $this->getPostByID($idPost);
+        return $post->archives()->detach($idArchives);
     }
 }

@@ -9,17 +9,18 @@
     @stop
 
     {!! Form::model($video, ['route' => ['videos.update', $video->id], 'method' => 'put']) !!}
-        {!! Form::label('title', 'Titulo') !!}
-        {!! Form::text('title') !!}
-        {!! Form::label('rel', 'Rel') !!}
-        {!! Form::text('rel') !!}
-        {!! Form::label('url', 'Url do Embed') !!}
-        {!! Form::text('url') !!}
-        {!! Form::submit('Editar Video') !!}
+        <div class="form-group">
+            {!! Form::label('title', 'Titulo') !!}
+            {!! Form::text('title', $video->title, ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('rel', 'Rel') !!}
+            {!! Form::text('rel', $video->rel, ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('url', 'Url do Embed') !!}
+            {!! Form::text('url', $video->url, ['class' => 'form-control']) !!}
+        </div>
+        {!! Form::submit('Editar Video', ['class' => 'btn btn-primary']) !!}
     {!! Form::close() !!}
-
-    {!! Form::open(['route' => ['videos.destroy', $video->id], 'method' => 'delete']) !!}
-        {!! Form::submit('Deletar Video') !!}
-    {!! Form::close() !!}
-
 @endsection

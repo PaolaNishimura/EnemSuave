@@ -40,8 +40,19 @@ class PostArchiveController extends Controller
     public function store($id, Request $request)
     {
         //
+        if($request->archives_id == "N"){
+            return redirect()->route('posts.archives.index', $id);
+        }
+
         $post = $this->post->addArchiveToPost($request->archives_id, $id);
 
         return redirect()->route('posts.archives.index', $id);
+    }
+
+    public function destroy($idPost, $idCategory)
+    {
+        $post = $this->post->removeArchiveToPost($idCategory, $idPost);
+
+        return redirect()->route('posts.archives.index', $idPost);
     }
 }

@@ -9,11 +9,15 @@
     @stop
 
     {!! Form::open(['route' => 'posts.store', 'method' => 'post']) !!}
-        {!! Form::label('title', 'Titulo') !!}
-        {!! Form::text('title') !!}
-        {!! Form::label('content', 'Conteudo') !!}
-        {!! Form::textarea('content') !!}
-        {!! Form::submit('Novo Post') !!}
+        <div class="form-group">
+            {!! Form::label('title', 'Titulo') !!}
+            {!! Form::text('title', '', ['class' => 'form-control']) !!}
+        </div>
+        <div class="form-group">
+            {!! Form::label('content', 'Conteudo') !!}
+            {!! Form::textarea('content', '', ['class' => 'form-control']) !!}
+        </div>
+        {!! Form::submit('Novo Post', ['class' => 'btn btn-primary']) !!}
     {!! Form::close() !!}
 
 @endsection

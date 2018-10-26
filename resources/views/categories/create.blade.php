@@ -8,9 +8,11 @@
     @stop
 
     {!! Form::open(['route' => 'categories.store', 'method' => 'post']) !!}
-        {!! Form::label('name', 'Nome') !!}
-        {!! Form::text('name') !!}
-        {!! Form::submit('Nova categoria') !!}
+        <div class="form-group">
+            {!! Form::label('name', 'Nome') !!}
+            {!! Form::text('name', '',['class' => 'form-control']) !!}
+        </div>
+        {!! Form::submit('Nova categoria', ['class' => 'btn btn-primary']) !!}
     {!! Form::close() !!}
 
 @endsection
