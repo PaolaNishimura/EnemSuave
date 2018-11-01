@@ -11,16 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomePostsController@index')->name('home.posts');
 
 Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::middleware(['auth'])->prefix('admin')->group(function () {
+    Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('categories', 'CategoryController')->except(['show']);
 
     Route::resource('videos', 'VideoController')->except(['show']);

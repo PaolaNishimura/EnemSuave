@@ -43,7 +43,7 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     
     public function getPosts()
     {
-        return $this->getAll();
+        return $this->getAll(5);
     }
 
     public function createPost(Request $request)
