@@ -12,6 +12,9 @@
 */
 
 Route::get('/', 'HomePostsController@index')->name('home.posts');
+Route::get('/post/{id}', 'SinglePostController@index')->name('home.post');
+Route::get('/video/{id}', 'SingleVideoController@index')->name('home.video');
+Route::get('/categorias/{id?}', 'HomeCategoryController@index')->name('home.categories');
 
 Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
@@ -30,5 +33,6 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::resource('users', 'UserController')->only(['index', 'show']);
     
     Route::resource('archives', 'ArchiveController')->except(['show']);
-    Route::post('archives/{id}/download', 'ArchiveController@download')->name('archives.download');
 });
+
+Route::post('archives/{id}/download', 'ArchiveController@download')->name('archives.download');

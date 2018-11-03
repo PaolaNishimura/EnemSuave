@@ -3,14 +3,20 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 use App\Repositories\PostRepository;
+use App\Repositories\VideoRepository;
 
-use Illuminate\Http\Request;
+use App\Traits\Paginate;
 
 class HomePostsController extends Controller
 {
+    use Paginate;
+
     private $posts;
+    private $videos;
     /**
      * Create a new controller instance.
      *
@@ -18,6 +24,7 @@ class HomePostsController extends Controller
      */
     public function __construct()
     {
+        $this->videos = new VideoRepository();
         $this->posts = new PostRepository();
     }
 
@@ -28,8 +35,15 @@ class HomePostsController extends Controller
      */
     public function index()
     {
-        $posts = $this->posts->getPosts();
         Carbon::setLocale('pt-br');
+        
+        $posts = $this->posts->getPosts();
+        $videos = $this->videos->getAllVideos();
+        $item = new Collection();
+
+        $posts = $item->push($posts)->push($videos);
+        $posts = $this->paginate($posts->flatten());
+
         return view('welcome', compact('posts'));
     }
 }

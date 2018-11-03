@@ -37,6 +37,27 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         $this->query = $this->newQuery();
     }
 
+    public function getAllCategories()
+    {
+        $this->query->withCount('posts', 'videos');
+
+        return $this->doQuery($this->query, false, false);
+    }
+
+    public function getPostsByCategoryID($id)
+    {
+        $this->query->with('posts.categories')->where('id', $id);
+
+        return $this->doQuery($this->query, null, false);
+    }
+
+    public function getVideosByCategoryID($id)
+    {
+        $this->query->with('videos.categories')->where('id', $id);
+
+        return $this->doQuery($this->query, null, false);
+    }
+
     public function getCategories($take = 15, $paginate = true)
     {
         return $this->getAll($take, $paginate);

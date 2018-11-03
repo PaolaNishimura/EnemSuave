@@ -43,7 +43,21 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
     
     public function getPosts()
     {
-        return $this->getAll(5);
+        $this->query->with('categories')->orderBy('created_at', 'desc');
+        
+        return $this->doQuery($this->query, false, false);
+    }
+
+    public function getPostByID($id)
+    {
+        return $this->findByID($id);
+    }
+
+    public function getPostByIDWithRelationship($id)
+    {
+        $this->query->with('categories', 'archives');
+
+        return $this->doQuery($this->query, null, false);
     }
 
     public function createPost(Request $request)
@@ -52,11 +66,6 @@ class PostRepository extends BaseRepository implements PostRepositoryInterface
         $data['user_id'] = Auth::user()->id;
 
         return $this->create($data);
-    }
-
-    public function getPostByID($id)
-    {
-        return $this->findByID($id);
     }
 
     public function updatePost(Model $model, Request $request)

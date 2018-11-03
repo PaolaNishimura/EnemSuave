@@ -46,6 +46,20 @@ class VideoRepository extends BaseRepository implements VideoRepositoryInterface
         return $this->getAll();
     }
 
+    public function getAllVideos()
+    {
+        $this->query->with('categories')->orderBy('created_at', 'desc');
+        
+        return $this->doQuery($this->query, false, false);
+    }
+
+    public function getVideoByIDWithRelationship($id)
+    {
+        $this->query->with('categories')->where('id', $id);
+
+        return $this->doQuery($this->query, null, false);
+    }
+
     public function createVideo(Request $request)
     {
         $data = $request->all();

@@ -114,10 +114,10 @@
                 @auth
                     <a href="{{ url('/home') }}">Home</a>
                 @else
-                    <a href="{{ route('login') }}">Login</a>
+                    <a href="{{ route('login') }}">Entrar</a>
 
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('register') }}">Registrar</a>
                     @endif
                 @endauth
             </div>
@@ -141,9 +141,8 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <div class="top-right links">
-                            <a href="{{ route('home.posts') }}">Home</a>
-                            <a href="{{ route('login') }}">Categorias</a>
-                            <a href="{{ route('register') }}">Sobre</a>
+                            <a href="{{ route('home.posts') }}">Inicio</a>
+                            <a href="{{ route('home.categories') }}">Categorias</a>
                         </div>
                     </ul>
                 </div>

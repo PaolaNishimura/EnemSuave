@@ -40,6 +40,10 @@ abstract class BaseRepository implements BaseRepositoryInterface
             return $query->paginate($take);
         }
 
+        if ($take == null && $take !== false) {
+            return $query->firstOrFail(); 
+        }
+
         if($take > 0 || $take !== false){
             $query->take($take);
         }
