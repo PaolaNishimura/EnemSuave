@@ -74,6 +74,7 @@
 
         .content {
             text-align: center;
+            margin-top: 15px;
         }
 
         .title {
@@ -98,6 +99,26 @@
             letter-spacing: .1rem;
             text-decoration: none;
             text-transform: uppercase;
+        }
+
+        .card-title-div{
+            margin-bottom: 15px;
+            border-bottom: 1px solid #fee;
+            padding: 15px;
+        }
+
+        .card-title{
+            font-weight: bold;
+        }
+
+        .card-body{
+            padding: 0;
+        }
+        
+        @media only screen and (max-width: 600px) {
+            .top-img{
+                display: none;
+            }
         }
 
         .m-b-md {
